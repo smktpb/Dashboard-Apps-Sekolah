@@ -2,105 +2,91 @@
 <html lang="ms">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0f766e">
   <title>Dashboard Apps Sekolah</title>
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div class="page-shell">
-    <header class="hero">
-      <div class="hero__content">
-        <p class="eyebrow">Pusat Akses Digital Sekolah</p>
-        <h1>Semua apps sekolah dalam satu laman</h1>
-        <p class="hero__lead">
-          Kumpulkan pautan AppSheet, Apps Script, Google Sheet, Excel, borang, dan sistem dalaman
-          dalam satu dashboard yang mudah dicapai pada komputer, telefon, dan tablet.
-        </p>
-        <div class="hero__actions">
-          <a class="button button--primary" href="#apps-grid">Lihat Apps</a>
-          <a class="button button--ghost" href="#panduan">Cara Kemaskini</a>
-        </div>
+  <div class="mobile-frame">
+    <header class="topbar">
+      <div>
+        <p class="eyebrow">Apps Sekolah</p>
+        <h1>Dashboard Utama</h1>
       </div>
-      <aside class="hero__panel">
-        <div class="stat-card">
-          <span class="stat-card__label">Jumlah Apps</span>
-          <strong id="app-count">0</strong>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__label">Kategori</span>
-          <strong id="category-count">0</strong>
-        </div>
-        <div class="stat-card">
-          <span class="stat-card__label">Status</span>
-          <strong>Mesra Telefon</strong>
-        </div>
-      </aside>
+      <button class="avatar-button" type="button" aria-label="Profil pengguna">SMK</button>
     </header>
 
-    <main>
-      <section class="controls" aria-label="Penapis apps">
-        <label class="search-box">
-          <span class="search-box__label">Cari app</span>
-          <input id="search-input" type="search" placeholder="Contoh: Kehadiran, Jadual, Data Murid">
-        </label>
+    <main class="app-shell">
+      <section class="welcome-card">
+        <div>
+          <p class="welcome-card__label">Pusat Akses Digital</p>
+          <h2>Semua sistem sekolah dalam satu skrin</h2>
+          <p>
+            Buka AppSheet, Apps Script, Google Sheet, Excel, dan pautan penting sekolah dengan lebih cepat
+            pada telefon, tablet, atau komputer.
+          </p>
+        </div>
+        <div class="welcome-card__stats">
+          <div>
+            <span>Jumlah Apps</span>
+            <strong id="app-count">0</strong>
+          </div>
+          <div>
+            <span>Kategori</span>
+            <strong id="category-count">0</strong>
+          </div>
+        </div>
+      </section>
 
+      <section class="search-panel" aria-label="Carian dan penapis apps">
+        <label class="search-box">
+          <span class="sr-only">Cari app</span>
+          <input id="search-input" type="search" placeholder="Cari app, unit, atau kategori">
+        </label>
         <label class="filter-box">
-          <span class="filter-box__label">Kategori</span>
+          <span class="sr-only">Tapis kategori</span>
           <select id="category-filter">
             <option value="all">Semua kategori</option>
           </select>
         </label>
       </section>
 
-      <section class="section">
-        <div class="section__heading">
-          <div>
-            <p class="eyebrow">Senarai Utama</p>
-            <h2>Apps & pautan penting</h2>
-          </div>
-          <p id="results-summary" class="section__summary"></p>
-        </div>
-
-        <div id="apps-grid" class="apps-grid" aria-live="polite"></div>
+      <section class="quick-strip" aria-label="Kategori ringkas">
+        <div id="quick-categories" class="quick-strip__list"></div>
       </section>
 
-      <section id="panduan" class="section guide">
-        <div class="section__heading">
-          <div>
-            <p class="eyebrow">Panduan Ringkas</p>
-            <h2>Cara guna dashboard ini</h2>
-          </div>
+      <section class="section-head">
+        <div>
+          <p class="eyebrow">Aplikasi</p>
+          <h2>Launcher sekolah</h2>
         </div>
+        <p id="results-summary" class="section-head__summary"></p>
+      </section>
 
-        <div class="guide-grid">
-          <article class="guide-card">
-            <h3>1. Simpan semua link di satu tempat</h3>
-            <p>
-              Tambah setiap app dalam fail <code>app.js</code>. Setiap rekod hanya perlukan nama,
-              kategori, penerangan, dan pautan.
-            </p>
-          </article>
+      <section id="apps-grid" class="apps-grid" aria-live="polite"></section>
 
-          <article class="guide-card">
-            <h3>2. Boleh guna pelbagai jenis sistem</h3>
-            <p>
-              Dashboard ini sesuai untuk pautan AppSheet, Apps Script web app, Google Sheet,
-              Microsoft Excel online, Google Form, dan laman dalaman sekolah.
-            </p>
-          </article>
-
-          <article class="guide-card">
-            <h3>3. Mesra telefon dan tablet</h3>
-            <p>
-              Paparan disusun secara responsif. Pengguna juga boleh tambah laman ini ke skrin utama
-              seperti aplikasi ringkas.
-            </p>
-          </article>
-        </div>
+      <section id="panduan" class="info-card">
+        <h3>Cara kemaskini apps</h3>
+        <p>
+          Tambah atau ubah senarai aplikasi dalam <code>app.js</code>. Setiap app hanya perlukan nama,
+          kategori, jenis sistem, pautan, dan pemilik ringkas.
+        </p>
       </section>
     </main>
+
+    <nav class="bottom-nav" aria-label="Navigasi utama">
+      <a class="bottom-nav__item bottom-nav__item--active" href="#">
+        <span>Home</span>
+      </a>
+      <a class="bottom-nav__item" href="#apps-grid">
+        <span>Apps</span>
+      </a>
+      <a class="bottom-nav__item" href="#panduan">
+        <span>Panduan</span>
+      </a>
+    </nav>
   </div>
 
   <script src="app.js"></script>

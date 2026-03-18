@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <meta name="theme-color" content="#0f766e">
-  <title>Dashboard Apps Sekolah</title>
+  <title>Dashboard Guru Sekolah</title>
   <link rel="manifest" href="manifest.json">
   <link rel="stylesheet" href="styles.css">
 </head>
@@ -12,61 +12,55 @@
   <div class="mobile-frame">
     <header class="topbar">
       <div>
-        <p class="eyebrow">Apps Sekolah</p>
-        <h1>Dashboard Utama</h1>
+        <p class="eyebrow">Portal Digital Guru</p>
+        <h1>Dashboard Guru Sekolah</h1>
       </div>
-      <button class="avatar-button" type="button" aria-label="Profil pengguna">SMK</button>
+      <div class="brand-mark" aria-hidden="true">DG</div>
     </header>
 
     <main class="app-shell">
       <section class="welcome-card">
-        <div>
-          <p class="welcome-card__label">Pusat Akses Digital</p>
-          <h2>Semua sistem sekolah dalam satu skrin</h2>
+        <div class="welcome-card__content">
+          <p class="welcome-card__label">Akses Utama Guru</p>
+          <h2>Semua aplikasi penting guru dalam satu paparan yang kemas</h2>
           <p>
-            Kategori utama kini disusun kepada Kurikulum, Kokurikulum, HEM, dan Pentadbiran supaya
-            warga sekolah lebih mudah mencari sistem yang berkaitan.
+            Dashboard ini menghimpunkan aplikasi Kurikulum, Kokurikulum, HEM, dan Pentadbiran untuk
+            memudahkan urusan harian guru di telefon, tablet, atau komputer.
           </p>
         </div>
         <div class="welcome-card__stats">
           <div>
-            <span>Jumlah Apps</span>
+            <span>Jumlah Aplikasi</span>
             <strong id="app-count">0</strong>
           </div>
           <div>
-            <span>Kategori</span>
+            <span>Kategori Utama</span>
             <strong id="category-count">0</strong>
           </div>
         </div>
       </section>
 
-      <section class="search-panel" aria-label="Carian dan penapis apps">
-        <label class="search-box panel-field">
+      <section class="search-panel" aria-label="Carian dan penapis aplikasi guru">
+        <label class="panel-field panel-field--wide">
           <span class="field-label">Carian</span>
-          <input id="search-input" type="search" placeholder="Cari app, unit, kategori, atau akses">
+          <input id="search-input" type="search" placeholder="Cari aplikasi, unit, atau kategori">
         </label>
-        <label class="filter-box panel-field">
+        <label class="panel-field">
           <span class="field-label">Kategori</span>
           <select id="category-filter">
             <option value="all">Semua kategori</option>
           </select>
         </label>
-        <label class="filter-box panel-field">
-          <span class="field-label">Akses</span>
-          <select id="access-filter">
-            <option value="all">Semua akses</option>
-          </select>
-        </label>
       </section>
 
-      <section class="quick-strip" aria-label="Kategori ringkas">
+      <section class="quick-strip" aria-label="Kategori utama guru">
         <div id="quick-categories" class="quick-strip__list"></div>
       </section>
 
       <section class="section-head">
         <div>
-          <p class="eyebrow">Aplikasi</p>
-          <h2>Launcher sekolah</h2>
+          <p class="eyebrow">Aplikasi Guru</p>
+          <h2>Senarai sistem dan pautan penting</h2>
         </div>
         <p id="results-summary" class="section-head__summary"></p>
       </section>
@@ -74,26 +68,18 @@
       <section id="apps-grid" class="apps-grid" aria-live="polite"></section>
 
       <section id="panduan" class="info-card">
-        <h3>Cara kemaskini apps</h3>
+        <h3>Panduan kemaskini</h3>
         <p>
-          Dalam <code>app.js</code>, gunakan salah satu kategori ini sahaja: <strong>Kurikulum</strong>,
-          <strong>Kokurikulum</strong>, <strong>HEM</strong>, atau <strong>Pentadbiran</strong>. Untuk akses,
-          gunakan senarai seperti <code>["Guru"]</code>, <code>["Ibu Bapa", "Guru"]</code>, atau
-          <code>["Admin"]</code>.
+          Tambah atau ubah aplikasi dalam <code>app.js</code> menggunakan kategori <strong>Kurikulum</strong>,
+          <strong>Kokurikulum</strong>, <strong>HEM</strong>, atau <strong>Pentadbiran</strong>.
         </p>
       </section>
     </main>
 
     <nav class="bottom-nav" aria-label="Navigasi utama">
-      <a class="bottom-nav__item bottom-nav__item--active" href="#">
-        <span>Home</span>
-      </a>
-      <a class="bottom-nav__item" href="#apps-grid">
-        <span>Apps</span>
-      </a>
-      <a class="bottom-nav__item" href="#panduan">
-        <span>Panduan</span>
-      </a>
+      <a class="bottom-nav__item bottom-nav__item--active" href="#">Utama</a>
+      <a class="bottom-nav__item" href="#apps-grid">Aplikasi</a>
+      <a class="bottom-nav__item" href="#panduan">Panduan</a>
     </nav>
   </div>
 

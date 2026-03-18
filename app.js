@@ -1,16 +1,21 @@
-﻿const apps = [
+﻿const CATEGORY_ORDER = ["Kurikulum", "Kokurikulum", "HEM", "Pentadbiran"];
+const ACCESS_ORDER = ["Ibu Bapa", "Guru", "Admin"];
+
+const apps = [
   {
     name: "Sistem Kehadiran Murid",
-    category: "Operasi Sekolah",
+    category: "HEM",
+    access: ["Guru", "Admin"],
     type: "AppSheet",
     icon: "📋",
-    description: "Rekod kehadiran harian murid oleh guru kelas atau pentadbir.",
+    description: "Rekod kehadiran harian murid oleh guru kelas dan pentadbir sekolah.",
     url: "https://example.com/kehadiran",
     owner: "Unit HEM"
   },
   {
     name: "Dashboard Analisis Peperiksaan",
-    category: "Akademik",
+    category: "Kurikulum",
+    access: ["Guru", "Admin"],
     type: "Google Sheet",
     icon: "📊",
     description: "Paparan ringkas pencapaian ujian, peperiksaan, dan perbandingan kelas.",
@@ -19,7 +24,8 @@
   },
   {
     name: "Permohonan Cuti Guru",
-    category: "Sumber Manusia",
+    category: "Pentadbiran",
+    access: ["Guru", "Admin"],
     type: "Apps Script",
     icon: "📝",
     description: "Borang digital dan rekod kelulusan untuk cuti guru dan staf.",
@@ -28,7 +34,8 @@
   },
   {
     name: "Inventori Makmal",
-    category: "Aset",
+    category: "Pentadbiran",
+    access: ["Guru", "Admin"],
     type: "Excel Online",
     icon: "🧪",
     description: "Semakan stok, alat rosak, dan rekod pembelian bagi makmal sekolah.",
@@ -37,7 +44,8 @@
   },
   {
     name: "Tempahan Bilik Khas",
-    category: "Operasi Sekolah",
+    category: "Pentadbiran",
+    access: ["Guru", "Admin"],
     type: "Google Form",
     icon: "🏫",
     description: "Tempahan bilik mesyuarat, makmal, dewan, dan bilik khas lain.",
@@ -47,11 +55,32 @@
   {
     name: "Laporan Disiplin",
     category: "HEM",
+    access: ["Guru", "Admin"],
     type: "AppSheet",
     icon: "🛡️",
     description: "Catatan kes disiplin, tindakan susulan, dan pemantauan status.",
     url: "https://example.com/laporan-disiplin",
     owner: "Guru Disiplin"
+  },
+  {
+    name: "Portal Markah Ibu Bapa",
+    category: "Kurikulum",
+    access: ["Ibu Bapa", "Admin"],
+    type: "Google Sheet",
+    icon: "👨‍👩‍👧",
+    description: "Semakan keputusan dan prestasi murid yang boleh diakses oleh ibu bapa.",
+    url: "https://example.com/markah-ibubapa",
+    owner: "Unit Kurikulum"
+  },
+  {
+    name: "Pendaftaran Aktiviti Kelab",
+    category: "Kokurikulum",
+    access: ["Guru", "Admin"],
+    type: "AppSheet",
+    icon: "🎯",
+    description: "Pendaftaran, kehadiran, dan pengurusan aktiviti kelab serta persatuan.",
+    url: "https://example.com/kokurikulum",
+    owner: "Unit Kokurikulum"
   }
 ];
 
@@ -59,18 +88,13 @@ const appsGrid = document.getElementById("apps-grid");
 const quickCategories = document.getElementById("quick-categories");
 const searchInput = document.getElementById("search-input");
 const categoryFilter = document.getElementById("category-filter");
+const accessFilter = document.getElementById("access-filter");
 const appCount = document.getElementById("app-count");
 const categoryCount = document.getElementById("category-count");
 const resultsSummary = document.getElementById("results-summary");
 
-function uniqueCategories(records) {
-  return [...new Set(records.map((app) => app.category))].sort((a, b) => a.localeCompare(b, "ms"));
-}
-
 function populateCategories() {
-  const categories = uniqueCategories(apps);
-
-  categories.forEach((category) => {
+  CATEGORY_ORDER.forEach((category) => {
     const option = document.createElement("option");
     option.value = category;
     option.textContent = category;
@@ -86,7 +110,7 @@ function populateCategories() {
   allButton.textContent = "Semua";
   quickCategories.appendChild(allButton);
 
-  categories.forEach((category) => {
+  CATEGORY_ORDER.forEach((category) => {
     const button = document.createElement("button");
     button.type = "button";
     button.className = "quick-chip";
@@ -95,8 +119,15 @@ function populateCategories() {
     quickCategories.appendChild(button);
   });
 
+  ACCESS_ORDER.forEach((access) => {
+    const option = document.createElement("option");
+    option.value = access;
+    option.textContent = access;
+    accessFilter.appendChild(option);
+  });
+
   appCount.textContent = apps.length;
-  categoryCount.textContent = categories.length;
+  categoryCount.textContent = CATEGORY_ORDER.length;
 }
 
 function renderApps(records) {
@@ -105,7 +136,7 @@ function renderApps(records) {
   if (!records.length) {
     const emptyState = document.createElement("div");
     emptyState.className = "empty-state";
-    emptyState.textContent = "Tiada app ditemui. Cuba kata kunci lain atau pilih kategori lain.";
+    emptyState.textContent = "Tiada app ditemui. Cuba kata kunci, kategori, atau akses lain.";
     appsGrid.appendChild(emptyState);
     resultsSummary.textContent = "0 aplikasi dipaparkan";
     return;
@@ -114,6 +145,10 @@ function renderApps(records) {
   records.forEach((app) => {
     const card = document.createElement("article");
     card.className = "app-card";
+
+    const accessPills = app.access
+      .map((label) => `<span class="access-pill">${label}</span>`)
+      .join("");
 
     card.innerHTML = `
       <div class="app-card__header">
@@ -128,6 +163,7 @@ function renderApps(records) {
         <span class="tag">${app.category}</span>
         <span class="owner-pill">${app.owner}</span>
       </div>
+      <div class="app-card__access">${accessPills}</div>
       <a class="app-link" href="${app.url}" target="_blank" rel="noreferrer">Buka App</a>
     `;
 
@@ -146,11 +182,16 @@ function setActiveChip(category) {
 function filterApps() {
   const searchTerm = searchInput.value.trim().toLowerCase();
   const selectedCategory = categoryFilter.value;
+  const selectedAccess = accessFilter.value;
 
   const filtered = apps.filter((app) => {
     const matchesCategory = selectedCategory === "all" || app.category === selectedCategory;
-    const haystack = [app.name, app.description, app.category, app.type, app.owner].join(" ").toLowerCase();
-    return matchesCategory && haystack.includes(searchTerm);
+    const matchesAccess = selectedAccess === "all" || app.access.includes(selectedAccess);
+    const haystack = [app.name, app.description, app.category, app.type, app.owner, ...app.access]
+      .join(" ")
+      .toLowerCase();
+
+    return matchesCategory && matchesAccess && haystack.includes(searchTerm);
   });
 
   renderApps(filtered);
@@ -159,6 +200,7 @@ function filterApps() {
 
 searchInput.addEventListener("input", filterApps);
 categoryFilter.addEventListener("change", filterApps);
+accessFilter.addEventListener("change", filterApps);
 quickCategories.addEventListener("click", (event) => {
   const button = event.target.closest(".quick-chip");
   if (!button) {

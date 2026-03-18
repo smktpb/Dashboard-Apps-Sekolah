@@ -24,8 +24,8 @@
           <p class="welcome-card__label">Pusat Akses Digital</p>
           <h2>Semua sistem sekolah dalam satu skrin</h2>
           <p>
-            Buka AppSheet, Apps Script, Google Sheet, Excel, dan pautan penting sekolah dengan lebih cepat
-            pada telefon, tablet, atau komputer.
+            Kategori utama kini disusun kepada Kurikulum, Kokurikulum, HEM, dan Pentadbiran supaya
+            warga sekolah lebih mudah mencari sistem yang berkaitan.
           </p>
         </div>
         <div class="welcome-card__stats">
@@ -41,14 +41,20 @@
       </section>
 
       <section class="search-panel" aria-label="Carian dan penapis apps">
-        <label class="search-box">
-          <span class="sr-only">Cari app</span>
-          <input id="search-input" type="search" placeholder="Cari app, unit, atau kategori">
+        <label class="search-box panel-field">
+          <span class="field-label">Carian</span>
+          <input id="search-input" type="search" placeholder="Cari app, unit, kategori, atau akses">
         </label>
-        <label class="filter-box">
-          <span class="sr-only">Tapis kategori</span>
+        <label class="filter-box panel-field">
+          <span class="field-label">Kategori</span>
           <select id="category-filter">
             <option value="all">Semua kategori</option>
+          </select>
+        </label>
+        <label class="filter-box panel-field">
+          <span class="field-label">Akses</span>
+          <select id="access-filter">
+            <option value="all">Semua akses</option>
           </select>
         </label>
       </section>
@@ -70,8 +76,10 @@
       <section id="panduan" class="info-card">
         <h3>Cara kemaskini apps</h3>
         <p>
-          Tambah atau ubah senarai aplikasi dalam <code>app.js</code>. Setiap app hanya perlukan nama,
-          kategori, jenis sistem, pautan, dan pemilik ringkas.
+          Dalam <code>app.js</code>, gunakan salah satu kategori ini sahaja: <strong>Kurikulum</strong>,
+          <strong>Kokurikulum</strong>, <strong>HEM</strong>, atau <strong>Pentadbiran</strong>. Untuk akses,
+          gunakan senarai seperti <code>["Guru"]</code>, <code>["Ibu Bapa", "Guru"]</code>, atau
+          <code>["Admin"]</code>.
         </p>
       </section>
     </main>

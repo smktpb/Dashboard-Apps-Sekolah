@@ -1,0 +1,9 @@
+﻿{
+  "name": "Dashboard Apps Sekolah",
+  "short_name": "Apps Sekolah",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#eff6f4",
+  "theme_color": "#0f766e",
+  "icons": []
+}

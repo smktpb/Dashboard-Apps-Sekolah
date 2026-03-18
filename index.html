@@ -1,0 +1,108 @@
+﻿<!DOCTYPE html>
+<html lang="ms">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#0f766e">
+  <title>Dashboard Apps Sekolah</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="page-shell">
+    <header class="hero">
+      <div class="hero__content">
+        <p class="eyebrow">Pusat Akses Digital Sekolah</p>
+        <h1>Semua apps sekolah dalam satu laman</h1>
+        <p class="hero__lead">
+          Kumpulkan pautan AppSheet, Apps Script, Google Sheet, Excel, borang, dan sistem dalaman
+          dalam satu dashboard yang mudah dicapai pada komputer, telefon, dan tablet.
+        </p>
+        <div class="hero__actions">
+          <a class="button button--primary" href="#apps-grid">Lihat Apps</a>
+          <a class="button button--ghost" href="#panduan">Cara Kemaskini</a>
+        </div>
+      </div>
+      <aside class="hero__panel">
+        <div class="stat-card">
+          <span class="stat-card__label">Jumlah Apps</span>
+          <strong id="app-count">0</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__label">Kategori</span>
+          <strong id="category-count">0</strong>
+        </div>
+        <div class="stat-card">
+          <span class="stat-card__label">Status</span>
+          <strong>Mesra Telefon</strong>
+        </div>
+      </aside>
+    </header>
+
+    <main>
+      <section class="controls" aria-label="Penapis apps">
+        <label class="search-box">
+          <span class="search-box__label">Cari app</span>
+          <input id="search-input" type="search" placeholder="Contoh: Kehadiran, Jadual, Data Murid">
+        </label>
+
+        <label class="filter-box">
+          <span class="filter-box__label">Kategori</span>
+          <select id="category-filter">
+            <option value="all">Semua kategori</option>
+          </select>
+        </label>
+      </section>
+
+      <section class="section">
+        <div class="section__heading">
+          <div>
+            <p class="eyebrow">Senarai Utama</p>
+            <h2>Apps & pautan penting</h2>
+          </div>
+          <p id="results-summary" class="section__summary"></p>
+        </div>
+
+        <div id="apps-grid" class="apps-grid" aria-live="polite"></div>
+      </section>
+
+      <section id="panduan" class="section guide">
+        <div class="section__heading">
+          <div>
+            <p class="eyebrow">Panduan Ringkas</p>
+            <h2>Cara guna dashboard ini</h2>
+          </div>
+        </div>
+
+        <div class="guide-grid">
+          <article class="guide-card">
+            <h3>1. Simpan semua link di satu tempat</h3>
+            <p>
+              Tambah setiap app dalam fail <code>app.js</code>. Setiap rekod hanya perlukan nama,
+              kategori, penerangan, dan pautan.
+            </p>
+          </article>
+
+          <article class="guide-card">
+            <h3>2. Boleh guna pelbagai jenis sistem</h3>
+            <p>
+              Dashboard ini sesuai untuk pautan AppSheet, Apps Script web app, Google Sheet,
+              Microsoft Excel online, Google Form, dan laman dalaman sekolah.
+            </p>
+          </article>
+
+          <article class="guide-card">
+            <h3>3. Mesra telefon dan tablet</h3>
+            <p>
+              Paparan disusun secara responsif. Pengguna juga boleh tambah laman ini ke skrin utama
+              seperti aplikasi ringkas.
+            </p>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
